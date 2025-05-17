@@ -8,12 +8,26 @@
 </head>
 <body>
 	<h1>Proejto Java EE</h1>
-	<form action="ReceberNome.jsp">
+	
+	
+<form action="ServletLogin" method="post">
+	<table>
+		<tr>
+			<td><label>Login <input name="login" type="text"></label></td>
+		</tr>
+		<tr>
+			<td><label>Senha <input name="senha" type="password"></label></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="Enviar">
+			</td>
+		</tr>
+	</table>
+</form>
 
-		<input name="nome">
-		 <input name="idade">
-		  <input type="submit" value="Enviar">
 
-	</form>
+<h4>${msg}</h4>
+
 </body>
 </html>
