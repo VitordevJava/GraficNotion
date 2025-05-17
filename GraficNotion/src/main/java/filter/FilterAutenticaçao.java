@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = "/principal/*") // Intercepta todas as requisições que vierem do projeto ou mapeamentos
 public class FilterAutenticaçao extends HttpFilter implements Filter {
@@ -28,7 +29,7 @@ public class FilterAutenticaçao extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletRequest session = (HttpServletRequest) req.getSession();
+		HttpSession session = req.getSession();
 		
 		String usuarioLogado = (String) session.getAttribute("usuario");
 
@@ -42,6 +43,7 @@ public class FilterAutenticaçao extends HttpFilter implements Filter {
 			RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp?url=" + urlParaAutenticar);
 			request.setAttribute("msg", "Por favor realize o login");
 			redirecionar.forward(request, response);
+			return; // para a execução e redireciona para o login
 		}
 		chain.doFilter(request, response);
 	}
